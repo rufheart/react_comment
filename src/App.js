@@ -1,25 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import {Context} from './Components/Context';
+import { useContext } from 'react';
+import Comments from './Components/Comments';
+
 
 function App() {
+  let {data, data1} = useContext(Context);
+  // console.log(data,'dataapp')
+  console.log(data1,'data1app')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+      <div className='body '>
+        <Comments comment = {data} reply={data1}/>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+
