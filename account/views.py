@@ -63,6 +63,7 @@ class Login_View(APIView):
             else:
                 return Response({'error':'User is not authenticated'})    
         except:
+            print(request.error)
             return Response({'error':'Something else error'})
 
                 
@@ -74,7 +75,16 @@ class Logout_View(APIView):
             auth.logout(request)
             return Response({'succes':'User is logout'})   
         except:
-            return Response({'error':'Something is wrong logout'})        
+            return Response({'error':'Something is wrong logout'})     
+
+class Delete_View(APIView):
+    def delete(self, request, format=None):
+        try:
+            user=self.request.user 
+            User.objects.filter(id=user.id).delete()   
+            return Response({'succes':'User is deleted sucsessfully'})    
+        except:
+            return Response({"error":"Something is happned"})           
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class GetCSRFToken(APIView):
