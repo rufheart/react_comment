@@ -149,4 +149,15 @@ REST_FRAMEWORK = {
         # 'rest_framework.authenticated.SessionAuthenticated',
     ]
 }
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend' #add this line
+#     'your auth backend'
+# ]
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'BBUser.models.AdminAuthBackend',
+#     ]
+
 CORS_ORIGIN_ALLOW_ALL = True
