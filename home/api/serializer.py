@@ -31,3 +31,6 @@ class CreateCommentSerialize(serializers.ModelSerializer):
         model = Comments
         fields = ('username','number','comment1')
 
+
+
+
