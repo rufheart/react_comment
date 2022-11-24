@@ -7,15 +7,23 @@ from django.contrib.auth.models import User
 from home.models import Comments, Reply
 from home.api.serializer import CommentsSerialize,CreateCommentSerialize,ReplySerialize
 from rest_framework import status
+from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser, SAFE_METHODS,IsAuthenticatedOrReadOnly 
+from rest_framework.decorators import api_view, permission_classes
+
+
+# @api_view(['GET'])
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
 
 class ListClass(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, *args, **kwargs):
         all = Comments.objects.all()
         serial = CommentsSerialize(all,many=True, context = {'request':request})
         return Response(serial.data)
     
     def post(self,request,*args,**kawrgs):
-        print('posy islediiiiiiiiiiiiiiiiiiiiiiiiiii',request.data)
         seri = CreateCommentSerialize(data=request.data)
         if seri.is_valid():
             seri.save()
@@ -23,6 +31,7 @@ class ListClass(APIView):
         return Response(seri.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 class ListClassPK(APIView):
+    permission_classes = [IsAuthenticated|ReadOnly]
     def get(self, request, pk, *args, **kwargs): 
         dataTen=Comments.objects.get(id=pk)
         serial = CommentsSerialize(dataTen)
@@ -37,6 +46,16 @@ class ListClassPK(APIView):
             serial.save()
             return Response(serial.data)  
         return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)   
+
+    def patch(self, request, pk, *args, **kwargs):
+        print('put ilsedi++++++++++++++++++++',pk)
+        dataTen=Comments.objects.get(id=pk)
+        print(dataTen)
+        serial = CreateCommentSerialize(dataTen, data=request.data, partial = True)
+        if serial.is_valid():
+            serial.save()
+            return Response(serial.data)  
+        return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)     
 
     def delete(self, request, pk, *args, **kwargs):
         data = Comments.objects.get(id=pk)
