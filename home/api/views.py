@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from home.models import Comments, Reply
-from home.api.serializer import CommentsSerialize,CreateCommentSerialize,ReplySerialize
+from home.api.serializer import CommentsSerialize,CreateCommentSerialize,ReplySerialize,PatchCommentSerialize
 from rest_framework import status
-from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser, SAFE_METHODS,IsAuthenticatedOrReadOnly 
+from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser, SAFE_METHODS,IsAuthenticatedOrReadOnly
 from rest_framework.decorators import api_view, permission_classes
 
 
@@ -38,25 +38,25 @@ class ListClassPK(APIView):
         return Response (serial.data) 
 
     def put(self, request, pk, *args, **kwargs):
-        print('put ilsedi++++++++++++++++++++',pk)
         dataTen=Comments.objects.get(id=pk)
-        print(dataTen)
-        serial = CreateCommentSerialize(dataTen, data=request.data)
-        if serial.is_valid():
-            serial.save()
-            return Response(serial.data)  
+        if request.user.is_superuser or dataTen.username.id==request.user.id:
+            serial = PatchCommentSerialize(dataTen, data=request.data)
+            if serial.is_valid():
+                serial.save()
+                return Response(serial.data)  
         return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)   
 
-    def patch(self, request, pk, *args, **kwargs):
-        print('put ilsedi++++++++++++++++++++',pk)
-        dataTen=Comments.objects.get(id=pk)
-        print(dataTen)
-        serial = CreateCommentSerialize(dataTen, data=request.data, partial = True)
-        if serial.is_valid():
-            serial.save()
-            return Response(serial.data)  
-        return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)     
 
+    def patch(self, request, pk, *args, **kwargs):
+        dataTen=Comments.objects.get(id=pk)
+        if request.user.is_superuser or dataTen.username.id==request.user.id:
+            serial = PatchCommentSerialize(dataTen, data=request.data, partial=True)
+            if serial.is_valid():
+                serial.save()
+                return Response(serial.data)  
+            return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)   
+        return Response("You can't change comment values, because you aren't this comment owner" ,status=status.HTTP_400_BAD_REQUEST)     
+        
     def delete(self, request, pk, *args, **kwargs):
         data = Comments.objects.get(id=pk)
         data.delete()

@@ -30,6 +30,10 @@ class CreateCommentSerialize(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields = ('username','number','comment1')
+class PatchCommentSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ('number','comment1')        
 
 
 
