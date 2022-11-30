@@ -163,4 +163,6 @@ REST_FRAMEWORK = {
 #     'BBUser.models.AdminAuthBackend',
 #     ]
 
+
+
 CORS_ORIGIN_ALLOW_ALL = True

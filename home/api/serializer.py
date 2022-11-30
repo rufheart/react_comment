@@ -33,7 +33,8 @@ class CreateCommentSerialize(serializers.ModelSerializer):
 class PatchCommentSerialize(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ('number','comment1')        
+        fields = ('username','number','comment1')       
+        read_only_fields = ['username']
 
 
 
