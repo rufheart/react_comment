@@ -28,12 +28,12 @@ class ListClass(APIView):
         return Response(serial.data)
     
     def post(self,request,*args, **kawrgs):
-        # print(request.user.id,request.data['username'])
-        # if request.data['username'] == request.user.id:
-        seri = CreateCommentSerialize(data=request.data)
-        if seri.is_valid():
-            seri.save()
-            return Response(seri.data, status=status.HTTP_201_CREATED)
+        print('Post isledi')
+        if request.data['username'] == request.user.id:
+            seri = CreateCommentSerialize(data=request.data)
+            if seri.is_valid():
+                seri.save()
+                return Response(seri.data, status=status.HTTP_201_CREATED)
         return Response("You can't post comment use other users id's", status=status.HTTP_400_BAD_REQUEST)  
 
 class ListClassPK(APIView):
