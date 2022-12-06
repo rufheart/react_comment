@@ -1,4 +1,4 @@
-#!/home/rufheart/Desktop/comment/.rufat/bin/python3
+#!/home/rufheart/Desktop/react_comment/.rufat/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

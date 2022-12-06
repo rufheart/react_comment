@@ -1,4 +1,3 @@
-from distutils.log import error
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from django.http import Http404, HttpResponse
@@ -11,22 +10,29 @@ from rest_framework import status
 from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser, SAFE_METHODS,IsAuthenticatedOrReadOnly
 from rest_framework.decorators import api_view, permission_classes
 from home.api.permissons import MyPermissions
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.settings import api_settings
-import json
+from rest_framework.pagination import PageNumberPagination
+# from rest_framework.settings import api_settings
+from home.api.pagination import BasicPagination
 from django.contrib import auth
-from rest_framework import generics
+from rest_framework.generics import ListAPIView
 
 
+class Test(ListAPIView):
+    queryset = Comments.objects.all()
+    serializer_class = CommentsSerialize
+    pagination_class = BasicPagination
 
-class ListClass(APIView):
-    permission_classes = [MyPermissions]
-    def get(self, request, *args, **kwargs):
-        a=request.GET.get('page_size')
+class ListClass(APIView, BasicPagination):
+    permission_classes = [MyPermissions]    
+
+    def get(self, request, *args, **kwargs):             
+        print('get ilsedi++++++++++')
         all = Comments.objects.all()
-        serial = CommentsSerialize(all,many=True, context = {'request':request})
-        return Response(serial.data)
-    
+        all = self.paginate_queryset(all, request, view=self)
+        all = CommentsSerialize(all, many = True)
+        return self.get_paginated_response(data=all.data)
+
+
     def post(self,request,*args, **kawrgs):
         print('Post isledi')
         if request.data['username'] == request.user.id:
