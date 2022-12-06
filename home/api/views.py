@@ -25,12 +25,17 @@ class Test(ListAPIView):
 class ListClass(APIView, BasicPagination):
     permission_classes = [MyPermissions]    
 
+    # def get(self, request, *args, **kwargs): 
+    #     all = Comments.objects.all()
+    #     serial = CommentsSerialize(all, many = True)    
+    #     return Response(serial.data)
+
     def get(self, request, *args, **kwargs):             
         print('get ilsedi++++++++++')
         all = Comments.objects.all()
         all = self.paginate_queryset(all, request, view=self)
         all = CommentsSerialize(all, many = True)
-        return self.get_paginated_response(data=all.data)
+        return Response(data=all.data)
 
 
     def post(self,request,*args, **kawrgs):
