@@ -10,7 +10,22 @@
     ul{
         display: flex;
         padding: 10px;
+        &>li:nth-child(1){
+            &>h1{
+                &>a{
+                    text-decoration: none;
+                    &>span:nth-child(1){
+                        color: red;
+                    }
+                    &>span:nth-child(2){
+                        color: blue;
+                    }
+                }
+            }
+        }
         &>li{
+            display: flex;
+            align-items: center;
             padding: 10px;
             margin: 0px 10px;
             list-style: none;

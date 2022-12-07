@@ -11,7 +11,18 @@
   display: flex;
   padding: 10px;
 }
+.header ul > li:nth-child(1) > h1 > a {
+  text-decoration: none;
+}
+.header ul > li:nth-child(1) > h1 > a > span:nth-child(1) {
+  color: red;
+}
+.header ul > li:nth-child(1) > h1 > a > span:nth-child(2) {
+  color: blue;
+}
 .header ul > li {
+  display: flex;
+  align-items: center;
   padding: 10px;
   margin: 0px 10px;
   list-style: none;

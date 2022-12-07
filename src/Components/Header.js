@@ -8,6 +8,14 @@ function Yuxari(){
         <div className="header">
             <ul>
                 <li>
+                    <h1>                    
+                        <Link to={'/'}>
+                            <span>Ten</span>
+                            <span>Plus</span>
+                        </Link>
+                    </h1>
+                </li>
+                <li>
                     <Link to={'/'}>Home</Link>               
                 </li>
                 <li>

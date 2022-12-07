@@ -5,9 +5,10 @@
 }
 
 .formdiv {
-  border: 1px solid blue;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 92vh;
 }
 .formdiv .form {
   width: 30%;
@@ -21,10 +22,10 @@
   text-align: center;
   color: rgb(180, 150, 90);
 }
-.formdiv .form > div:nth-child(4) {
+.formdiv .form > div:nth-child(5) {
   margin-bottom: 50px;
 }
-.formdiv .form > div:nth-child(4) > a {
+.formdiv .form > div:nth-child(5) > a {
   text-decoration: none;
 }
 .formdiv .form > div {
@@ -40,8 +41,9 @@
 .formdiv .form > div > input {
   border-radius: 5px;
   border: none;
-  border: 1px solid black;
+  border: 1px solid blue;
   outline: none;
   box-sizing: border-box;
   padding-left: 20px;
+  padding: 30px;
 }/*# sourceMappingURL=Login.css.map */
