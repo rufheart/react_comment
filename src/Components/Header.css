@@ -1,0 +1,22 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #F7CAC9;
+}
+.header ul {
+  display: flex;
+  padding: 10px;
+}
+.header ul > li {
+  padding: 10px;
+  margin: 0px 10px;
+  list-style: none;
+}
+.header ul > li > a {
+  text-decoration: none;
+  color: black;
+}/*# sourceMappingURL=Header.css.map */
