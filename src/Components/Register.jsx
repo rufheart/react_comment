@@ -17,10 +17,22 @@ function Qeydiyyat(){
         setRepass(e.target.value)
     }
 
-    function onsubmit(e){
+ 
+    async function onsubmit(e){
         e.preventDefault()
-        console.log(username,password, repassword)
+        console.log(username,password)
+        let data = {username,password}
+        const response = await fetch('http://127.0.0.1:8000/account/register/',{
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(data)
+            }
+        )
     }
+
 
     return(
         <div className='formdiv'>
@@ -37,8 +49,8 @@ function Qeydiyyat(){
                     <input type="text"  id='password' onChange={writepass} value={password}/>
                 </div>
                 <div>
-                    <label htmlFor="re-password">Confirm Password</label>
-                    <input type="text"  id='re-password' onChange={writerepass} value={repassword}/>
+                    {/* <label htmlFor="re-password">Confirm Password</label>
+                    <input type="text"  id='re-password' onChange={writerepass} value={repassword}/> */}
                 </div>
                 <div>
                     <input type="submit" onClick={onsubmit}/>

@@ -12,9 +12,18 @@ function Giris(){
     function writepass(e){
         setPassword(e.target.value)
     }
-    function onsubmit(e){
+    async function onsubmit(e){
         e.preventDefault()
         console.log(username,password)
+        let data = {username,password}
+        const response = await fetch('http://127.0.0.1:8000/account/token/',{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(data)
+            }
+        )
     }
     return(
         <div className='formdiv'>
