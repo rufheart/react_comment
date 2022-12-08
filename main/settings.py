@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     #other_apps
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True 
@@ -175,6 +177,11 @@ REST_FRAMEWORK = {
     
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:3000"
+]
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=20),
@@ -208,4 +215,3 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-CORS_ORIGIN_ALLOW_ALL = True

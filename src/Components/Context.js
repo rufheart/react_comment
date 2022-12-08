@@ -92,9 +92,10 @@ function Provider({children}){
     // useEffect(()=>{
     //     setData1(reply)
     // }, [])
+    let [user, setUser] = useState(localStorage.access)
 
     return(
-        <Context.Provider  value={{data: [data] , data1: [data1]}}>
+        <Context.Provider  value={{data: [data] , data1: [data1],setUser,user}}>
             {children}
         </Context.Provider>
     )

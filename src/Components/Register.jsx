@@ -18,7 +18,7 @@ function Qeydiyyat(){
     }
 
  
-    async function onsubmit(e){
+    async function onSubmit(e){
         e.preventDefault()
         console.log(username,password)
         let data = {username,password}
@@ -36,7 +36,7 @@ function Qeydiyyat(){
 
     return(
         <div className='formdiv'>
-            <form className='form'>
+            <form className='form' onSubmit={onSubmit}>
                 <div>
                     <h1>Register</h1>
                 </div>
@@ -53,7 +53,7 @@ function Qeydiyyat(){
                     <input type="text"  id='re-password' onChange={writerepass} value={repassword}/> */}
                 </div>
                 <div>
-                    <input type="submit" onClick={onsubmit}/>
+                    <input type="submit" onClick={onSubmit}/>
                 </div>
                 <div>
                     <Link to={'/login'}>If you have account, Go</Link>

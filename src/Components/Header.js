@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css'
+import { useContext } from 'react';
+import { Context } from './Context';
 
 function Yuxari(){
-
+    let {user} = useContext(Context)
+    console.log(user)
     return(
         <div className="header">
             <ul>
@@ -18,12 +21,14 @@ function Yuxari(){
                 <li>
                     <Link to={'/'}>Home</Link>               
                 </li>
+                {user?            
+                <li>
+                    <Link to={'/register'}>Register</Link>
+                </li>:
                 <li>
                     <Link to={'/login'}>Login</Link>
                 </li>
-                <li>
-                    <Link to={'/register'}>Register</Link>
-                </li>
+                }
             </ul>
         </div>
     )
