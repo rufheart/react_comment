@@ -8,17 +8,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Yuxari from './Components/Header';
 import Giris from './Components/Login';
 import Qeydiyyat from './Components/Register';
+import Afterapp from './Afterapp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider>
-      <Yuxari/>
-        <Routes>
-          <Route path='/' element={<App/>}/>
-          <Route path='/login' element={<Giris/>}/>
-          <Route path='/register' element={<Qeydiyyat/>}/>
-        </Routes>
+        <Afterapp/>
     </Provider>
   </BrowserRouter>
 );

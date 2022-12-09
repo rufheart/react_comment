@@ -6,7 +6,7 @@ import { Context } from './Context';
 
 function Yuxari(){
     let {user} = useContext(Context)
-    console.log(user)
+    console.log(user,'Header')
     return(
         <div className="header">
             <ul>
@@ -21,13 +21,15 @@ function Yuxari(){
                 <li>
                     <Link to={'/'}>Home</Link>               
                 </li>
-                {user?            
-                <li>
-                    <Link to={'/register'}>Register</Link>
-                </li>:
-                <li>
-                    <Link to={'/login'}>Login</Link>
-                </li>
+                {user?null:            
+                    <>
+                        <li>
+                            <Link to={'/login'}>Login</Link>
+                        </li>
+                        <li>
+                            <Link to={'/register'}>Register</Link>
+                        </li>                
+                    </>
                 }
             </ul>
         </div>

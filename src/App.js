@@ -3,6 +3,7 @@ import './App.css';
 import {Context} from './Components/Context';
 import { useContext } from 'react';
 import Comments from './Components/Comments';
+import Giris from './Components/Login';
 import Yuxari from './Components/Header';
 import { Routes, Route } from 'react-router-dom';
 

@@ -4,18 +4,23 @@ import { Link } from "react-router-dom";
 import Qeydiyyat from './Register';
 import { useContext } from 'react';
 import { Context } from './Context';
+import { Navigate } from 'react-router-dom';
 
 function Giris(){
     let [username, setUsername] = useState()
     let [password, setPassword] = useState()
-    let {setUser} = useContext(Context)
+    let {user1, setUser} = useContext(Context)
 
+
+    console.log(user ,'giris')
     function writename(e){
         setUsername(e.target.value)
     }
+
     function writepass(e){
         setPassword(e.target.value)
     }
+
     function onsubmit(e){
         e.preventDefault()
         console.log(username,password)
@@ -32,10 +37,16 @@ function Giris(){
         ).then(data => data.json()).then(js => {
             localStorage.setItem('access', js.access);
             localStorage.setItem('refresh', js.refresh)
+            localStorage.setItem('username',js.username)
             setUser(js.username)
         })
-
+        console.log('Submitdeki',user)
     }
+    console.log(user,'++++++++++++++++')
+    // if(user){
+    //     console.log('uservar')
+    //     return <Navigate to='/' /> 
+    // }
 
     return(
         <div className='formdiv'>
