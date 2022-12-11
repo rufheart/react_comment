@@ -7,12 +7,12 @@ import { Context } from './Context';
 import { Navigate } from 'react-router-dom';
 
 function Giris(){
+    console.log('login isledi')
     let [username, setUsername] = useState()
     let [password, setPassword] = useState()
-    let {user1, setUser} = useContext(Context)
+    let {user, setUser} = useContext(Context)
 
 
-    console.log(user ,'giris')
     function writename(e){
         setUsername(e.target.value)
     }
@@ -21,17 +21,16 @@ function Giris(){
         setPassword(e.target.value)
     }
 
-    function onsubmit(e){
+    function onSubmit(e){
         e.preventDefault()
-        console.log(username,password)
-        let user = {username,password}
+        let istifadeci = {username,password}
         fetch('http://127.0.0.1:8000/account/token/',{
             method: 'POST',
             headers: {
                 'Content-Type':'application/json'
             },
-            credentials:'include',
-            body:JSON.stringify(user)
+            // credentials:'include',
+            body:JSON.stringify(istifadeci)
             },
             // console.log(data.json)
         ).then(data => data.json()).then(js => {
@@ -40,17 +39,16 @@ function Giris(){
             localStorage.setItem('username',js.username)
             setUser(js.username)
         })
-        console.log('Submitdeki',user)
     }
-    console.log(user,'++++++++++++++++')
-    // if(user){
-    //     console.log('uservar')
-    //     return <Navigate to='/' /> 
-    // }
+    if(user){
+        console.log('if user isledi')
+        return <Navigate to='/' />
+    }
+
 
     return(
         <div className='formdiv'>
-            <form className='form' onsubmit={onsubmit}>
+            <form className='form' onsubmit={onSubmit}>
                 <div>
                     <h1>Login</h1>
                 </div>
@@ -63,7 +61,7 @@ function Giris(){
                     <input type="text" id='password' onChange={writepass} value={password}/>
                 </div>
                 <div>
-                    <input type="submit" onClick={onsubmit}/>
+                    <input type="submit" onClick={onSubmit}/>
                 </div>
                 <div>
                     <Link to={'/register'}>Go to Register</Link>

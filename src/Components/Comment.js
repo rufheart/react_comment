@@ -1,7 +1,10 @@
 import { useState ,useEffect} from "react";
 import Reply from "./Reply";
+import { useContext } from "react";
+import { Context } from "./Context";
 
 function Comment({value1,value2,id}){
+    let {user} = useContext(Context)
     console.log(value1.id,'value1')
     console.log(value2,'value2')
     let [uid, setuid] = useState(value1.id)
@@ -69,7 +72,7 @@ function Comment({value1,value2,id}){
                             <img src={value1.username.image} alt="" />
                             <p>{value1.username.username}</p>
                             <p>{value1.startdate}</p>
-                            <i className="fa fa-reply" onClick={show}><span>Reply</span></i>
+                            {user?<i className="fa fa-reply" onClick={show}><span>Reply</span></i>:null}
                         </div>
                         <div>
                             {value1.comment1}

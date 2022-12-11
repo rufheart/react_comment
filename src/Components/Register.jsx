@@ -1,12 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link ,Navigate} from "react-router-dom";
 import React, {useState} from "react";
 import './Register.css'
+import { useContext } from "react";
+import { Context } from "./Context";
+
+
 function Qeydiyyat(){
     let [username, setUser] = useState()
     let [password, setPass] = useState()
     let [repassword, setRepass] = useState()
-
-
+    let [soz,setSoz] = useState('soz')
+    let {user} = useContext(Context)
+    console.log(user)
+    if(user){
+        return(
+            <Navigate to={'/'} />
+        )
+    }
     function writeuser(e){
         setUser(e.target.value)
     }

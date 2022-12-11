@@ -84,7 +84,7 @@ function Provider({children}){
     //     })}
     // },[])
 
-    console.log(data1,'context')
+    // console.log(data1,'context')
     // useEffect(()=>{
     //     setData(comments)
     // }, [])
@@ -92,8 +92,8 @@ function Provider({children}){
     // useEffect(()=>{
     //     setData1(reply)
     // }, [])
-    let [user, setUser] = useState(localStorage.username)
-    console.log(localStorage.username,'context')
+    let [user,setUser] = useState(localStorage.username)
+    console.log(user,'context')
 
     return(
         <Context.Provider  value={{data: [data] , data1: [data1],user,setUser}}>

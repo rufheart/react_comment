@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Context } from './Context';
 
 function Yuxari(){
-    let {user} = useContext(Context)
+    let {user,setUser} = useContext(Context)
     console.log(user,'Header')
     return(
         <div className="header">
@@ -21,7 +21,9 @@ function Yuxari(){
                 <li>
                     <Link to={'/'}>Home</Link>               
                 </li>
-                {user?null:            
+                {user?  <li>
+                            <Link to={'/logout'}>Logout</Link> 
+                        </li>    :       
                     <>
                         <li>
                             <Link to={'/login'}>Login</Link>
