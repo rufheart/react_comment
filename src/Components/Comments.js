@@ -1,13 +1,16 @@
 import { useState } from "react";
 import Comment from "./Comment";
+import { useContext } from "react";
+import { Context } from "./Context";
+import userEvent from "@testing-library/user-event";
 
 function Comments({comment,reply}){
-    
+    let {photo} = useContext(Context)
     let [deyer, setDeyer] = useState()
-    // console.log(reply,'Comentssssssssssssssssssssssssssssssssssssssssssssssssssss')
-    // for(let i of reply[0]){
-    //     console.log(i,'iiiiiiiiiii')
-    // }
+
+
+
+    console.log(photo,'photosssss')    
     return(
         <div>
             <div className="comments">
@@ -30,7 +33,7 @@ function Comments({comment,reply}){
                            <div className="send">
                                <div>
                                     <div>
-                                        <img src={require('../ls.webp')} alt="" />
+                                        <img src={'http://127.0.0.1:8000'+photo} alt="" />
                                     </div>
                                     <div>
                                         <textarea/> 

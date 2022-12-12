@@ -5,12 +5,8 @@ import { Context } from "./Context";
 
 function Comment({value1,value2,id}){
     let {user} = useContext(Context)
-    console.log(value1.id,'value1')
-    console.log(value2,'value2')
     let [uid, setuid] = useState(value1.id)
     let [fa,setFa] = useState('fa')
-    // console.log(uid,'uid+++')
-    // console.log(value2,'value222222')
     let [deyer, setDeyer] = useState(value1.number)
     let [fl,setFl] = useState(false)
     let [re,setRe] = useState(false)

@@ -11,6 +11,7 @@ function Giris(){
     let [username, setUsername] = useState()
     let [password, setPassword] = useState()
     let {user, setUser} = useContext(Context)
+    let {photo, setPhoto} = useContext(Context)
 
 
     function writename(e){
@@ -38,6 +39,8 @@ function Giris(){
             localStorage.setItem('refresh', js.refresh)
             localStorage.setItem('username',js.username)
             setUser(js.username)
+            setPhoto(js.image)
+            console.log(js.image,'lohin image')
         })
     }
     if(user){
