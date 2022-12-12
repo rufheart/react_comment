@@ -34,12 +34,12 @@ class ListClass(APIView, BasicPagination):
         print('get ilsedi++++++++++')
         all = Comments.objects.all()
         all = self.paginate_queryset(all, request, view=self)
-        all = CommentsSerialize(all, many = True)
+        all = CommentsSerialize(all, many = True, context={'request': request})
         return Response(data=all.data)
 
 
     def post(self,request,*args, **kawrgs):
-        print('Post isledi')
+        print('Post isledi',request.data['username'],request.user.id)
         if request.data['username'] == request.user.id:
             seri = CreateCommentSerialize(data=request.data)
             if seri.is_valid():

@@ -41,14 +41,15 @@ function Reply({value3,value4}){
                         </div>
                         <div>
                             {user==value3.username.username?
-                                <div>
+                                <div className="auth">
                                     <img src={value3.username.image} alt="" />
                                     <p>{value3.username.username}</p>
                                     <p>you</p>
                                     <p>{value3.startdate}</p>
-                                    <button></button>                                                      
+                                    <i class="fa fa-trash"><span>Delete</span></i>
+                                    <i class="fa fa-pencil"><span>Edit</span></i>                                                       
                                 </div>:                            
-                                <div>
+                                <div className="nonauth">
                                     <img src={value3.username.image} alt="" />
                                     <p>{value3.username.username}</p>
                                     <p>{value3.startdate}</p>
@@ -56,7 +57,7 @@ function Reply({value3,value4}){
                                 </div>  
                             }
                             <div>
-                                {value3.reply}
+                                {value3.reply}/
                             </div>
                         </div>
                     </div>
