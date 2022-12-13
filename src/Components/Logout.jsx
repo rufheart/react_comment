@@ -8,6 +8,9 @@ function Cixis(){
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
     localStorage.removeItem('username');
+    localStorage.removeItem('photo');
+    // localStorage.removeItem('id');
+    localStorage.removeItem('access')
     setUser()
     return(
         <Navigate to={'/'} />

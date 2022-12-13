@@ -94,10 +94,12 @@ function Provider({children}){
     // }, [])
     let [user,setUser] = useState(localStorage.username)
     let [photo,setPhoto] = useState(localStorage.photo)
+    let [id, setId] = useState()
+    let [access, setAccess] = useState(localStorage.access)
     console.log(user,'context')
 
     return(
-        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto}}>
+        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto,id,setId,access,setAccess}}>
             {children}
         </Context.Provider>
     )

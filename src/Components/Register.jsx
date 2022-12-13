@@ -11,6 +11,7 @@ function Qeydiyyat(){
     let [repassword, setRepass] = useState()
     let [soz,setSoz] = useState('soz')
     let {user} = useContext(Context)
+
     console.log(user)
     if(user){
         return(

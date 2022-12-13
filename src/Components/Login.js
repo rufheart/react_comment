@@ -12,6 +12,8 @@ function Giris(){
     let [password, setPassword] = useState()
     let {user, setUser} = useContext(Context)
     let {photo, setPhoto} = useContext(Context)
+    let {id, setId} = useContext(Context)
+    let {access,SetAccess} = useContext(Context)
 
 
     function writename(e){
@@ -38,8 +40,12 @@ function Giris(){
             localStorage.setItem('access', js.access);
             localStorage.setItem('refresh', js.refresh)
             localStorage.setItem('username',js.username)
+            // localStorage.setItem('photo', js.image)
+            // localStorage.setItem('id',js.id)
             setUser(js.username)
             setPhoto(js.image)
+            setId(js.id)
+            SetAccess(js.access)
             console.log(js.image,'lohin image')
         })
     }

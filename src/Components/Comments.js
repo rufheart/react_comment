@@ -7,10 +7,30 @@ import userEvent from "@testing-library/user-event";
 function Comments({comment,reply}){
     let {photo} = useContext(Context)
     let [deyer, setDeyer] = useState()
+    let {id} = useContext(Context)
+    let {access} = useContext(Context)
+    let [area,setArea] = useState()
 
+    console.log(access,'acesssss')
 
+    let sender = {'username':Number(id),'comment1':area,access}
+    let token = localStorage.getItem('access')
+    function write(e){
+        setArea(e.target.value)
+    }
+    async function onSubmit(e){
+        e.preventDefault()
+        let response= await fetch('http://127.0.0.1:8000/homeapi/comment/',{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Bearer'+token
+            },
+            body:JSON.stringify(sender)
+        })
+    }
 
-    console.log(photo,'photosssss')    
+    console.log(area,'photosssss')    
     return(
         <div>
             <div className="comments">
@@ -31,17 +51,17 @@ function Comments({comment,reply}){
                     return(
                         <div>
                            <div className="send">
-                               <div>
+                                <form action="" onsubmit={onSubmit}>
                                     <div>
                                         <img src={'http://127.0.0.1:8000'+photo} alt="" />
                                     </div>
                                     <div>
-                                        <textarea/> 
+                                        <textarea onChange={write} value={area}/> 
                                     </div>
                                     <div>
-                                        <button>Send</button>
+                                        <input type="submit" onClick={onSubmit}/>
                                     </div>
-                                </div>    
+                                </form>
                            </div>                           
                         </div>
                     )
@@ -52,3 +72,8 @@ function Comments({comment,reply}){
 }
 
 export default Comments
+
+
+{/* <div>
+
+</div> */}

@@ -12,7 +12,7 @@ class ABS(models.Model):
 
 class Comments(ABS):    #Əsas Comment          
     username = models.ForeignKey(User, related_name='user1',on_delete=models.CASCADE)
-    number = models.IntegerField()
+    number = models.IntegerField(blank=True,null=True)
     comment1 = models.TextField()
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Comments(ABS):    #Əsas Comment
 class Reply(ABS):   #Commentin Commenti
     username = models.ForeignKey(User, related_name='user2',on_delete=models.CASCADE)
     comment2 = models.ForeignKey(Comments,related_name='comments1',on_delete=models.CASCADE)       #Commente bagli olan comment
-    number2 = models.IntegerField()
+    number2 = models.IntegerField(blank=True,null=True)
     reply = models.TextField()
 
     def __str__(self) :

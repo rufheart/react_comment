@@ -25,13 +25,8 @@ class Test(ListAPIView):
 class ListClass(APIView, BasicPagination):
     permission_classes = [MyPermissions]    
 
-    # def get(self, request, *args, **kwargs): 
-    #     all = Comments.objects.all()
-    #     serial = CommentsSerialize(all, many = True)    
-    #     return Response(serial.data)
 
     def get(self, request, *args, **kwargs):             
-        print('get ilsedi++++++++++')
         all = Comments.objects.all()
         all = self.paginate_queryset(all, request, view=self)
         all = CommentsSerialize(all, many = True, context={'request': request})
@@ -39,6 +34,8 @@ class ListClass(APIView, BasicPagination):
 
 
     def post(self,request,*args, **kawrgs):
+        print(request.data,request,'burda request user var')
+        print(request.data,'dataaaa')
         print('Post isledi',request.data['username'],request.user.id)
         if request.data['username'] == request.user.id:
             seri = CreateCommentSerialize(data=request.data)
@@ -56,7 +53,7 @@ class ListClassPK(APIView):
 
     def put(self, request, pk, *args, **kwargs):
         dataTen=Comments.objects.get(id=pk)
-    # if request.user.is_superuser or dataTen.username.id==request.user.id:
+
         serial = PatchCommentSerialize(dataTen, data=request.data)
         if serial.is_valid():
             serial.save()
@@ -66,13 +63,11 @@ class ListClassPK(APIView):
 
     def patch(self, request, pk, *args, **kwargs):
         dataTen=Comments.objects.get(id=pk)
-    # if request.user.is_superuser or dataTen.username.id==request.user.id:
         serial = PatchCommentSerialize(dataTen, data=request.data, partial=True)
         if serial.is_valid():
             serial.save()
             return Response(serial.data)  
         return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)   
-        return Response("You can't change comment values, because you aren't this comment owner" ,status=status.HTTP_400_BAD_REQUEST)     
         
     def delete(self, request, pk, *args, **kwargs):
         data = Comments.objects.get(id=pk)

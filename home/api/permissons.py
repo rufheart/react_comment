@@ -2,12 +2,13 @@ from wsgiref.util import request_uri
 from rest_framework import permissions
 
 class MyPermissions(permissions.BasePermission):
+    print('permisson isledi')
     def has_permission(self, request, view):
-        print(request.POST,'++++++++++')
+        
         if request.method in permissions.SAFE_METHODS:
             return True
-        if request.method is not permissions.SAFE_METHODS and request.user.is_authenticated:
-            print('POSTTTTTTTTTTTTTTTTTTT')
+        if request.method is not permissions.SAFE_METHODS :
+            print('permisson post isledi','reuqest')
             return True    
 
     def has_object_permission(self, request, view,obj):
