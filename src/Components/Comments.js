@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { useContext } from "react";
 import { Context } from "./Context";
 import userEvent from "@testing-library/user-event";
 
 function Comments({comment,reply}){
-    let {photo} = useContext(Context)
+    let [photo, setPhoto] = useState()
     let [deyer, setDeyer] = useState()
-    let {id} = useContext(Context)
+    let [id, setId] = useState()
+    let {user} = useContext(Context)
     let {access} = useContext(Context)
     let [area,setArea] = useState()
+    let {getuser} = useContext(Context)
 
-    console.log(access,'acesssss')
 
-    let sender = {'username':Number(id),'comment1':area,access}
+    let sender = {'username':Number(id),'comment1':area}
     let token = localStorage.getItem('access')
     function write(e){
         setArea(e.target.value)
     }
+
+    useEffect(()=>{
+        for(let i of getuser){
+            console.log(i)
+            if(i['username']==user){
+                console.log(i['username'])
+                setId(i['id'])
+                setPhoto(i['image'])
+                
+            }
+        }
+    })
+
     async function onSubmit(e){
         e.preventDefault()
         let response= await fetch('http://127.0.0.1:8000/homeapi/comment/',{
@@ -53,7 +67,7 @@ function Comments({comment,reply}){
                            <div className="send">
                                 <form action="" onsubmit={onSubmit}>
                                     <div>
-                                        <img src={'http://127.0.0.1:8000'+photo} alt="" />
+                                        <img src={photo} alt="" />
                                     </div>
                                     <div>
                                         <textarea onChange={write} value={area}/> 

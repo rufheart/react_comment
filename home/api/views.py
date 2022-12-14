@@ -15,6 +15,7 @@ from rest_framework.pagination import PageNumberPagination
 from home.api.pagination import BasicPagination
 from django.contrib import auth
 from rest_framework.generics import ListAPIView
+# from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
 
 class Test(ListAPIView):
@@ -34,7 +35,17 @@ class ListClass(APIView, BasicPagination):
 
 
     def post(self,request,*args, **kawrgs):
-        print(request.data,request,'burda request user var')
+        token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+        print(token)
+        data = {'token': token}
+        # try:
+        #     valid_data = VerifyJSONWebTokenSerializer().validate(data)
+        #     user = valid_data['user']
+        #     request.user = user
+        # except:
+        #     print("validation error")
+
+        print(request.data,request.user.username,'burda request user var')
         print(request.data,'dataaaa')
         print('Post isledi',request.data['username'],request.user.id)
         if request.data['username'] == request.user.id:

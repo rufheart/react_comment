@@ -74,8 +74,15 @@ function Provider({children}){
 
     }, [])
 
+    useEffect(()=>{
+        fetch('http://127.0.0.1:8000/account/getusers/').then(response => response.json()).then(data => {
+            setGetuser(data)
+        })
+    },[])
+
     let [data, setData] = useState([])
     let [data1, setData1] = useState([])
+    let [getuser, setGetuser] = useState([])
     // useEffect(()=>{
     //     {data.map((value,index)=>{
     //         return(
@@ -99,7 +106,7 @@ function Provider({children}){
     console.log(user,'context')
 
     return(
-        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto,id,setId,access,setAccess}}>
+        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto,id,setId,access,setAccess,getuser}}>
             {children}
         </Context.Provider>
     )
