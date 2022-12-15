@@ -82,31 +82,19 @@ function Provider({children}){
 
     let [data, setData] = useState([])
     let [data1, setData1] = useState([])
-    let [getuser, setGetuser] = useState([])
-    // useEffect(()=>{
-    //     {data.map((value,index)=>{
-    //         return(
-    //             setData1([...data1,value.comments1])
-    //         )
-    //     })}
-    // },[])
+    let [getuser, setGetuser] = useState([])   /* fetch 2 uchun */
 
-    // console.log(data1,'context')
-    // useEffect(()=>{
-    //     setData(comments)
-    // }, [])
 
-    // useEffect(()=>{
-    //     setData1(reply)
-    // }, [])
+
     let [user,setUser] = useState(localStorage.username)
     let [photo,setPhoto] = useState(localStorage.photo)
     let [id, setId] = useState()
     let [access, setAccess] = useState(localStorage.access)
+    let [refresh, setRefresh] = useState(localStorage.refresh)
     console.log(user,'context')
 
     return(
-        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto,id,setId,access,setAccess,getuser}}>
+        <Context.Provider  value={{data: [data] , data1: [data1],user,setUser,photo,setPhoto,id,setId,access,setAccess,getuser,refresh,setRefresh}}>
             {children}
         </Context.Provider>
     )

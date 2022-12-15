@@ -14,6 +14,7 @@ function Giris(){
     let {photo, setPhoto} = useContext(Context)
     let {id, setId} = useContext(Context)
     let {access,SetAccess} = useContext(Context)
+    let {refresh,setRefresh} = useContext(Context)
 
 
     function writename(e){
@@ -32,16 +33,14 @@ function Giris(){
             headers: {
                 'Content-Type':'application/json'
             },
-            // credentials:'include',
             body:JSON.stringify(istifadeci)
             },
-            // console.log(data.json)
         ).then(data => data.json()).then(js => {
             localStorage.setItem('access', js.access);
             localStorage.setItem('refresh', js.refresh)
             localStorage.setItem('username',js.username)
-            // localStorage.setItem('photo', js.image)
-            // localStorage.setItem('id',js.id)
+
+            setRefresh(js.refresh)
             setUser(js.username)
             setPhoto(js.image)
             setId(js.id)
@@ -50,7 +49,6 @@ function Giris(){
         })
     }
     if(user){
-        console.log('if user isledi')
         return <Navigate to='/' />
     }
 

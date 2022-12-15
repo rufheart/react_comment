@@ -11,11 +11,9 @@ from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUs
 from rest_framework.decorators import api_view, permission_classes
 from home.api.permissons import MyPermissions
 from rest_framework.pagination import PageNumberPagination
-# from rest_framework.settings import api_settings
 from home.api.pagination import BasicPagination
 from django.contrib import auth
 from rest_framework.generics import ListAPIView
-# from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
 
 class Test(ListAPIView):
@@ -35,24 +33,12 @@ class ListClass(APIView, BasicPagination):
 
 
     def post(self,request,*args, **kawrgs):
-        token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
-        print(token)
-        data = {'token': token}
-        # try:
-        #     valid_data = VerifyJSONWebTokenSerializer().validate(data)
-        #     user = valid_data['user']
-        #     request.user = user
-        # except:
-        #     print("validation error")
-
-        print(request.data,request.user.username,'burda request user var')
-        print(request.data,'dataaaa')
-        print('Post isledi',request.data['username'],request.user.id)
-        if request.data['username'] == request.user.id:
-            seri = CreateCommentSerialize(data=request.data)
-            if seri.is_valid():
-                seri.save()
-                return Response(seri.data, status=status.HTTP_201_CREATED)
+        print(request.user,'postadi user')
+        # if request.data['username'] == request.user.id:
+        seri = CreateCommentSerialize(data=request.data)
+        if seri.is_valid():
+            seri.save()
+            return Response(seri.data, status=status.HTTP_201_CREATED)
         return Response("You can't post comment use other users id's", status=status.HTTP_400_BAD_REQUEST)  
 
 class ListClassPK(APIView):

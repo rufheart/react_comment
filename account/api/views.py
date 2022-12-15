@@ -12,9 +12,7 @@ class GetUsersView(APIView):
     permission_classes=[AllowAny]
 
     def get(self, request, *args, **kwargs):
-        print('get geti isledi*************')
         all = User.objects.all()
-        print(all,'///////////')
         serial =GetUserSerializer(all,many=True,context={'request': request})
         print(serial)
         return Response(data=serial.data)

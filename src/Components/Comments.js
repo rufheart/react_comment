@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { useContext } from "react";
 import { Context } from "./Context";
-import userEvent from "@testing-library/user-event";
+import { Link, Navigate } from "react-router-dom";
+
 
 function Comments({comment,reply}){
     let [photo, setPhoto] = useState()
     let [deyer, setDeyer] = useState()
     let [id, setId] = useState()
     let {user} = useContext(Context)
-    let {access} = useContext(Context)
+    let [access, setAccess] = useState()
     let [area,setArea] = useState()
     let {getuser} = useContext(Context)
+    let {refresh,setRefresh} = useContext(Context)
 
 
     let sender = {'username':Number(id),'comment1':area}
-    let token = localStorage.getItem('access')
+    let token = access
     function write(e){
         setArea(e.target.value)
     }
@@ -31,17 +33,37 @@ function Comments({comment,reply}){
             }
         }
     })
+    
+    
 
+    useEffect(() => {
+        let verify = {'refresh':refresh}
+        fetch('http://127.0.0.1:8000/account/token/refresh/',{
+            method:'POST',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(verify)
+        }).then(response => response.json()).then(data => {
+            setAccess(data['access'])
+            console.log(data,'burda aacessss+++++++++++++')
+        })
+
+    }, [])
+    console.log(typeof(access),'ssssssssssssssss')
     async function onSubmit(e){
         e.preventDefault()
         let response= await fetch('http://127.0.0.1:8000/homeapi/comment/',{
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
-                'Authorization':'Bearer'+token
+                'Authorization':'Bearer '+token
             },
             body:JSON.stringify(sender)
         })
+        return(
+            <Navigate to='/'/>
+        )
     }
 
     console.log(area,'photosssss')    
@@ -49,12 +71,10 @@ function Comments({comment,reply}){
         <div>
             <div className="comments">
                 {comment[0].map((value,index)=>{
-
                     return(
                         <div>
                             {console.log(value.comments1,'dgdgdhhdjdkdkddkejdrkr==')}
-                            <Comment value1={value} value2={value.comments1} key={index} id={value.id} />
-                           
+                            <Comment value1={value} value2={value.comments1} key={index} id={value.id} />                           
                         </div>
                     )
                 })}
@@ -87,7 +107,3 @@ function Comments({comment,reply}){
 
 export default Comments
 
-
-{/* <div>
-
-</div> */}

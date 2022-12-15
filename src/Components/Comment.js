@@ -79,7 +79,6 @@ function Comment({value1,value2,id}){
                 <div>
                     <div>
                         {value2.map((value,index)=>{
-                            // console.log(value,'maaaaaaaaaaaaaaaaaaaaaaaaa    
                             if(value.comment2==value1.id){
                                 count+=1
                             
@@ -91,18 +90,13 @@ function Comment({value1,value2,id}){
             </div>
             {tl==false?null: 
             <div className="div">
-                {/* <div>
-                    <div></div>
-                </div> */}
                 <div className="uc">
                     <div className="uc1">
 
                     </div>
                 {value2.map((value,index)=>(
                     <div className="uc1">
-
                         {value.comment2 == uid ?<Reply value3={value}/>:null}
-
                     </div>
                 ))}
                 </div>
